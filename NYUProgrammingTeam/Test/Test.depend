@@ -1,7 +1,0 @@
-# depslib dependency file v1.0
-1506728938 source:c:\users\nickg\documents\nyu\progteam\test\main.cpp
-	<stdio.h>
-	<iostream>
-	<string>
-	<sstream>
-
