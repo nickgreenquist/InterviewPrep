@@ -1,6 +1,5 @@
 
-def canFinish(numCourses, prerequisites):
-    
+def canFinish(numCourses, prerequisites):S
     adj_list = {}
     for p in prerequisites:
         source = p[1]
