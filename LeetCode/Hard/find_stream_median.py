@@ -33,7 +33,7 @@ class MedianFinder(object):
         # get the smallest number from the right heap (middle value)
         smallest_from_right = self.right.pop()
         
-        # add to the right heap
+        # add to the left heap
         self.left.push(smallest_from_right)
         
         if len(self.right.heap) < len(self.left.heap):

@@ -1,5 +1,7 @@
 def get_longest_word(words):
-    # array = sorted(words)
+    # sort words by longest length
+    
+
     bag = {}
     for a in words:
         bag[a] = True
