@@ -10,7 +10,9 @@ def floydWarshall(graph):
         for j in range(0, V):
             if graph[i][j] < INF:
                 dist[i][j] = graph[i][j]
-     
+    
+    # k acts as a 'visit this right before j' node, so k is in between the path from i->j
+    # for every k, check if i->k + k->j is better than the straight distance from i->j
     for k in range(V):
         for i in range(V):
             for j in range(V):
