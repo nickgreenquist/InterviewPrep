@@ -9,7 +9,7 @@ class Graph(object):
         self.G[u].append(v)
         self.V += 1
     
-    # find the subset of an element i
+    # find the set of an element i
     def find_parent(self, parent, i):
         if parent[i] == -1:
             return i
