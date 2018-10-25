@@ -9,26 +9,16 @@ class Queue:
             self.head = Node(value)
             self.tail = self.head
         else:
-            new_head = Node(value)
-            new_head.next = self.head
-            self.head = new_head
+            new_tail = Node(value)
+            self.tail.next = new_tail
+            self.tail = new_tail
     def dequeue(self):
         if self.empty():
             return None
-        elif self.head == self.tail:
-            val = self.head.value
-            self.head = None
-            self.tail = None
-            return val
         else:
-            last = self.head
-            pt = last.next
-            while pt != self.tail:
-                last = pt
-                pt = pt.next
-            last.next = None
-            self.tail = last
-            return pt.value
+            val = self.head.value
+            self.head = self.head.next
+            return val
 
 class Node:
     def __init__(self, value):
