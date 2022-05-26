@@ -37,14 +37,19 @@ class AVL_Tree(object):
         if not root:
             return 0
         return root.height
+    
+    def get_size(self, root):
+        if not root:
+            return 0
+        return root.size
 
     def rot_left(self, root):
         new_root = root.right
         root.right = new_root.left
         new_root.left = root    
 
-        new_root.height = max(self.get_height(new_root.left), self.get_height(new_root.right)) + 1
         root.height = max(self.get_height(root.left), self.get_height(root.right)) + 1
+        new_root.height = max(self.get_height(new_root.left), self.get_height(new_root.right)) + 1
 
         return new_root
 
@@ -53,8 +58,8 @@ class AVL_Tree(object):
         root.left = new_root.right
         new_root.right = root
 
-        new_root.height = max(self.get_height(new_root.left), self.get_height(new_root.right)) + 1
         root.height = max(self.get_height(root.left), self.get_height(root.right)) + 1
+        new_root.height = max(self.get_height(new_root.left), self.get_height(new_root.right)) + 1
 
         return new_root
     
@@ -66,8 +71,11 @@ class AVL_Tree(object):
         else:
             root.right = self._insert(root.right, val)
 
+        root.height = max(self.get_height(root.left), self.get_height(root.right)) + 1
+
         # Balance the tree if needed
         balance = self.get_height(root.left) - self.get_height(root.right)
+
         # Left
         if balance > 1:
             # Left
@@ -87,8 +95,6 @@ class AVL_Tree(object):
             else:
                 root.right = self.rot_right(root.right)
                 return self.rot_left(root)
-
-        root.height = max(self.get_height(root.left), self.get_height(root.right)) + 1
 
         return root
     
@@ -115,3 +121,19 @@ for i in range(120):
 
 print(max_depth(t.root))
 # print(inorder_traversal(t.root))
+print()
+
+t = AVL_Tree()
+t.insert(1)
+t.insert(2)
+t.insert(3)
+
+
+print(t.root.val)
+print(t.root.left.val)
+
+print()
+
+print(t.get_height(t.root))
+print(t.get_height(t.root.right))
+print(t.get_height(t.root.right.left))
