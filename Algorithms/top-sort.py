@@ -24,17 +24,15 @@ class Graph():
         for dest in destinations:
             self.insert_edge(source, dest)
 
-    def dfs(self, node, seen):
+    def dfs(self, node, seen, processed):
         seen.add(node.val)
-        processed = []
         
         for v in node.edges:
             if v.val not in seen:
-                processed += self.dfs(v, seen)
+                self.dfs(v, seen, processed)
 
         # finished processing node
         processed.append(node.val)
-        return processed
     
     def top_sort(self):
         seen = set()
@@ -42,7 +40,7 @@ class Graph():
 
         for v_val in self.vertices.keys():
             if v_val not in seen:
-                processed += self.dfs(self.vertices[v_val], seen)
+                self.dfs(self.vertices[v_val], seen, processed)
         return processed
 
 G = Graph()
