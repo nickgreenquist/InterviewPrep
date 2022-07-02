@@ -3,19 +3,28 @@ import heapq
 def dijkstras(graph, start):
     heap = []
     heapq.heappush(heap, (0, start))
-    seen = {start: 0}
+    
+    dist = {}
+    for i in range(len(graph)):
+        dist[i] = 100000
+    dist[start] = 0
+
+    processed = set()
+    processed.add(start)
     path = {}
 
     while heap:
         current_distance, min_v = heapq.heappop(heap)
+        processed.add(min_v)
+
         for v in range(len(graph[min_v])):
             if graph[min_v][v] != 0:
                 distance = current_distance + graph[min_v][v]
-                if v not in seen or distance < seen[v]:
-                    seen[v] = distance
+                if v not in processed and distance < dist[v]:
+                    dist[v] = distance
                     heapq.heappush(heap, (distance, v))
                     path[v] = min_v
-    return seen, path
+    return dist, path
 
 def shortest_path(graph, start, end):
     seen, path = dijkstras(graph, start)
