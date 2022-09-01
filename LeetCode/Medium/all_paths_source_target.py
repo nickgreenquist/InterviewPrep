@@ -34,3 +34,26 @@ v    v
 There are two paths: 0 -> 1 -> 3 and 0 -> 2 -> 3.
 '''
 print(allPathsSourceTarget([[1,2], [3], [3], []]))
+
+
+class Solution:
+    def dfs(self, graph, path, current, target):
+        if current == target:
+            self.result.append(path.copy())
+        
+        for dest in graph[current]:
+            path.append(dest)
+            self.dfs(graph, path, dest, target)
+            path.pop()
+        
+        
+    def allPathsSourceTarget(self, graph):
+        self.result = []
+        path = [0]
+        
+        self.dfs(graph, path, 0, len(graph) - 1)
+        
+        return self.result
+
+s = Solution()
+print(s.allPathsSourceTarget([[1,2], [3], [3], []]))
