@@ -1,4 +1,3 @@
-
 def is_number(s):
     try:
         float(s)
@@ -64,3 +63,55 @@ print(isValidSudoku([
   [".",".",".","4","1","9",".",".","5"],
   [".",".",".",".","8",".",".","7","9"]
 ]))
+
+# Solution 2
+class Solution:
+    def checkRows(self, board):
+        rows = len(board)
+        cols = len(board[0])
+        for i in range(rows):
+            seen = set()
+            for j in range(cols):
+                if board[i][j] == '.':
+                    continue
+                if board[i][j] in seen:
+                    return False
+                seen.add(board[i][j])
+        return True
+                
+        
+    def checkColumns(self, board):
+        rows = len(board)
+        cols = len(board[0])
+        for i in range(cols):
+            seen = set()
+            for j in range(rows):
+                if board[j][i] == '.':
+                    continue
+                if board[j][i] in seen:
+                    return False
+                seen.add(board[j][i])
+        return True
+        
+    def checkGrids(self, board):
+        for i in range(3):
+            for j in range(3):
+                seen = set()
+                for k in range(3):
+                    for p in range(3):
+                        row = (i * 3) + k
+                        col = (j * 3) + p
+                        val = board[row][col]
+                        if val == '.':
+                            continue
+                        if val in seen:
+                            return False
+                        seen.add(val)
+        return True
+        
+    def isValidSudoku(self, board):
+        areRowsValid = self.checkRows(board)
+        areColsValid = self.checkColumns(board)
+        areGridsValid = self.checkGrids(board)
+        
+        return areRowsValid and areColsValid and areGridsValid
