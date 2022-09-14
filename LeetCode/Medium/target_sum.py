@@ -36,3 +36,25 @@ Explanation:
 There are 5 ways to assign symbols to make the sum of nums be target 3.
 '''
 print(findTargetSumWays(nums = [1, 1, 1, 1, 1], S = 3))
+
+# Another Solution - 2022
+class Solution:
+    def dfs(self, nums, cur, target, i, dp):
+        if (i,cur) in dp:
+            return dp[(i,cur)]
+        if i == len(nums) and cur == target:
+            return 1
+        if i >= len(nums):
+            return 0
+        
+        add = self.dfs(nums, cur + nums[i], target, i + 1, dp)
+        sub = self.dfs(nums, cur - nums[i], target, i + 1, dp)
+        
+        dp[(i,cur)] = add + sub
+        return dp[(i,cur)]
+        
+    def findTargetSumWays(self, nums, target):
+        dp = {}
+            
+        ways = self.dfs(nums, 0, target, 0, dp)
+        return ways
