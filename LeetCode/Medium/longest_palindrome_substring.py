@@ -34,3 +34,41 @@ Input: "cbbd"
 Output: "bb"
 '''
 print(longestPalindrome("cbbd"))
+
+
+# Another O(N^2) solution using two pointer bubble from middle approach
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        if len(s) == 1:
+            return s
+    
+        res_L = 0
+        res_R = 0
+        res_len = 0
+        
+        for i in range(len(s)):
+            # check odd length
+            left = i
+            right = i
+            while left >= 0 and right < len(s) and s[left] == s[right]:
+                palindrome_len = right - left + 1
+                if palindrome_len > res_len:
+                    res_len = palindrome_len
+                    res_L = left
+                    res_R = right
+                left -= 1
+                right += 1
+            
+            # check even length
+            left = i
+            right = i + 1
+            while left >= 0 and right < len(s) and s[left] == s[right]:
+                palindrome_len = right - left + 1
+                if palindrome_len > res_len:
+                    res_len = palindrome_len
+                    res_L = left
+                    res_R = right
+                left -= 1
+                right += 1
+        
+        return s[res_L:res_R+1]
