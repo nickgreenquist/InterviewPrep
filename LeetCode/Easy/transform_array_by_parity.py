@@ -26,4 +26,3 @@ Output: [0,0,1,1,1]
 nums = [1,5,1,4,2]
 expected = [0,0,1,1,1]
 print(transformArray(nums) == expected)
-
