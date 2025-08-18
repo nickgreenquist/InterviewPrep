@@ -15,7 +15,7 @@ class LCA_Solution(object):
             if root.val == q.val:
                 found_q = True
             
-            if (already_found_p or found_p) and (already_found_q and found_q):
+            if (already_found_p or found_p) and (already_found_q or found_q):
                 return True, True
             
             for child in [root.left, root.right]:
