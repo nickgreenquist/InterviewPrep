@@ -15,6 +15,27 @@ def eraseOverlapIntervals(intervals):
             current = intervals[i][1]
     return skip
 
+# sorts by starting position of interval but requires checking min of
+# current interval end and last skipped interval end
+def eraseOverlapIntervals2(intervals):
+    """
+    :type intervals: List[List[int]]
+    :rtype: int
+    """
+    intervals.sort()
+    
+    prev_end = intervals[0][1]
+    skip = 0
+    for i in range(1, len(intervals)):
+        start = intervals[i][0]
+        end = intervals[i][1]
+        if start >= prev_end:
+            prev_end = end
+        else: 
+            skip += 1
+            prev_end = min(end, prev_end)
+    return skip
+
 
 '''
 Input: intervals = [[1,2],[2,3],[3,4],[1,3]]
@@ -23,4 +44,4 @@ Explanation: [1,3] can be removed and the rest of the intervals are non-overlapp
 '''
 intervals = [[1,2],[2,3],[3,4],[1,3]]
 
-print(eraseOverlapIntervals(intervals))
+print(eraseOverlapIntervals2(intervals))
