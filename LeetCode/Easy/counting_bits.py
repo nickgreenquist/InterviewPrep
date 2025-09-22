@@ -40,6 +40,12 @@ because 5&1 == 1.
 similarly, if we shift 4 to the right by 1, which becomes 2 as well,
 and 4&1 is 0, so number of 1's in 4, is the the number of 1's in 2 plus 0,
 because 4&1 == 0.
+
+i=3
+dp[3] = dp[3 >> 1] + (3 % 1)
+dp[3] = dp[0011 >> 1] + (0011 % 1)
+dp[3] = dp[0001] + (1)
+dp[3] = dp[1] + (1)
 '''
 def countingBitsLeftShift(n):
     dp = [0] * (n+1)
