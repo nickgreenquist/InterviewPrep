@@ -40,7 +40,9 @@ def validTree(n: int, edges: List[List[int]]) -> bool:
             has_cycle = dfs(-1, node)
             if has_cycle:
                 return False
-    return True
+    
+    # if we visited all nodes and never found cycle above
+    return all(visited.values())
 
 '''
 Input:
